@@ -1,12 +1,25 @@
-import html from '../core/html';
-import { connect } from './store';
+import { html, styleSheet } from '../core'
+import Sidebar from './components/Sidebar';
+import Content from './components/Content';
 
-const connector = connect(state => state.auth);
+styleSheet`
+.app-container {
+  width: 100%;
+  height: 100%;
+  background-color: #FFFFFF;
+  color: #000000;
+}
+`
 
-const App = (props) => {
+const App = () => {
   return html`
-    <h1>Hello World!</h1>
+    <div class="app-container">
+      <div class="app-container__inner d-flex">
+        ${Sidebar()}
+        ${Content()}
+      </div>
+    </div>
   `
 }
 
-export default connector(App);
+export default App;
