@@ -4,6 +4,13 @@
  */
 const createStore = (reducer) => {
   let state = reducer();
+  let useStateData = {
+    count: 0,
+    newValue: null
+  };
+  let useEffectData = {
+    count: 0,
+  };
   const roots = new Map();
 
   function render() {
@@ -30,10 +37,47 @@ const createStore = (reducer) => {
     dispatch(action, ...args) {
       // Trả ra giá trị trước đó của state
       // Dựa vào action để sửa state
+      const prevState = state;
       state = reducer(state, action, ...args);
-      return render();
+
+      if (JSON.stringify(prevState) !== JSON.stringify(state)) {
+        return render();
+      }
+      return;
+    },
+    useState(init) {
+      useStateData.count++;
+      if (useStateData.count > 1 && useStateData.newData) {
+        init = useStateData.newData;
+      }
+      const setFunction = (newData) => {
+        if (typeof newData === 'function') {
+          useStateData.newData = newData();
+        } else {
+          useStateData.newData = newData;
+        }
+        return render();
+      }
+      return [init, setFunction];
+    },
+    useEffect(func, dependencies = null) {
+      useEffectData.count++;
+      if (Array.isArray(dependencies) && !dependencies.length && useEffectData.count <= 1) {
+        func();
+      }
     }
   };
 };
+
+export const storeLogger = (reducer) => {
+  return (prevState, action, args) => {
+    // console.group(action);
+    // console.table([{ state: prevState, args: args }])
+    const nextState = reducer(prevState, action, args);
+    // console.table([{ state: nextState, args: args }])
+    // console.groupEnd();
+    return nextState;
+  }
+}
 
 export default createStore;
