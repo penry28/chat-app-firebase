@@ -1,0 +1,47 @@
+.main-sidebar {
+  background: rgb(116,96,239);
+  background: linear-gradient(173deg, rgba(116,96,239,1) 0%, rgba(41,174,218,1) 52%, rgba(48,212,176,1) 89%);
+  flex: 0 0 27%;
+  max-width: 27%;
+  height: 100vh;
+  &__header {
+    border-bottom: 1px solid #707070;
+    padding: 10px 15px;
+  }
+  &__user-info {
+    .avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+    .username {
+      color: #ffffff;
+      font-weight: 300;
+    }
+  }
+  &__btns {
+    border: 1px solid #ffffff;
+    border-radius: 3px;
+    span {
+      color: #ffffff!important;
+    }
+    svg {
+      width: 1.2em;
+      height: 1.2em;
+      fill: #ffffff;
+    }
+  }
+  &__content {
+    padding: 20px;
+    .title {
+      font-size: 1.3rem;
+      color: #ffffff;
+    }
+    .rooms .room {
+      color: #ffffff;
+      display: inline-block;
+      padding: 5px;
+      font-size: 1rem;
+    }
+  }
+}
