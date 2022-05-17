@@ -1,0 +1,6 @@
+1. Stack
+- Javascript
+- ES6
+- Firebase
+- Facebook Login
+- Heroku
